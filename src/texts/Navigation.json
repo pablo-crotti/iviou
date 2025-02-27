@@ -1,0 +1,26 @@
+[
+  {
+    "fr": "Accueil",
+    "en": "Home",
+    "de": "Startseite",
+    "url": "/"
+  },
+  {
+    "fr": "À propos",
+    "en": "About",
+    "de": "Über",
+    "url": "/about"
+  },
+  {
+    "fr": "Projets",
+    "en": "Projects",
+    "de": "Projekte",
+    "url": "/projects"
+  },
+  {
+    "fr": "Contact",
+    "en": "Contact",
+    "de": "Kontakt",
+    "url": "/contact"
+  }
+]

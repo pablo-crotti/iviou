@@ -1,0 +1,17 @@
+{
+  "siteTitle": "iviou.",
+  "languages": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Français",
+      "code": "fr"
+    },
+    {
+      "name": "Deutsch",
+      "code": "de"
+    }
+  ]
+}
