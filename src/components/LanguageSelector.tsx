@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Language = {
   code: string;
@@ -12,6 +13,8 @@ export const LanguageSelector = () => {
 
   const [lng, setLng] = useState<Language["code"]>("en");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const actualPath = window.location.pathname;
 
@@ -19,10 +22,10 @@ export const LanguageSelector = () => {
       const userLanguage = navigator.language;
 
       if (availableLanguages.some((lang) => lang.code === userLanguage)) {
-        window.location.pathname = `/${userLanguage}`;
+        navigate(`/${userLanguage}`);
         setLng(userLanguage);
       } else {
-        window.location.pathname = "/en";
+        navigate("/en");
         setLng("en");
       }
     } else {
@@ -31,19 +34,18 @@ export const LanguageSelector = () => {
       if (availableLanguages.some((lang) => lang.code === pathLanguage)) {
         setLng(pathLanguage);
       } else {
-        window.location.pathname = "/en";
+        navigate("/en");
         setLng("en");
       }
     }
-  });
+  }, [availableLanguages, navigate]);
 
   return (
     <div className="w-screen fixed top-0 right-0 p-4 bg-light-100 dark:bg-dark-100">
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
-        // className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        className="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-light-200 text-dark-100 dark:bg-dark-200 dark:text-light-100"
+        className="font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-light-200 text-dark-100 dark:bg-dark-200 dark:text-light-100 hover:opacity-80 duration-300"
         type="button"
       >
         {constants.languages.find((lang) => lang.code === lng)?.name}
@@ -74,17 +76,20 @@ export const LanguageSelector = () => {
         >
           {constants.languages.map((language) => (
             <li key={language.code}>
-              <a
+              <button
                 type="button"
-                href={`/${language.code}`}
-                className={`block px-10 py-2 hover:bg-light-200 dark:hover:bg-dark-300${
+                onClick={() => {
+                  navigate(`/${language.code}`);
+                  setLng(language.code);
+                }}
+                className={`block w-full px-10 py-2 hover:bg-light-200 dark:hover:bg-dark-300${
                   language.code === lng
                     ? "bg-light-200 dark:bg-dark-300 opacity-50 pointer-events-none"
                     : ""
                 }`}
               >
                 {language.name}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
